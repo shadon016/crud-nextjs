@@ -15,3 +15,11 @@ export async function createPost(postData) {
   if (!res.ok) throw new Error("Failed to create post");
   return res.json();
 }
+
+export async function deletePost(id) {
+  const res = await fetch(`${process?.env?.BASE_URL}/api/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Failed to delete post");
+  return res.json();
+}
