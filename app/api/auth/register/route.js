@@ -1,16 +1,16 @@
-import { usersModel } from "@/models/schemas/userSchema";
+import { User } from "@/models/userSchema";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
-import { DbCon } from "@/services/mongo";
+import { connectDb } from "@/config/mongo";
 
 export const POST = async (request) => {
+  await connectDb();
   const { username, email, password } = await request.json();
-  await DbCon();
 
   const hashedPassword = await bcrypt.hash(password, 5);
 
   try {
-    await usersModel.create({
+    await User.create({
       username,
       email,
       password: hashedPassword,

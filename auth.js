@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import { User } from "@/models/userSchema.js";
 
 export const {
   auth,
@@ -20,7 +21,7 @@ export const {
       async authorize(credentials) {
         if (credentials == null) return null;
         try {
-          const user = await usersModel.findOne({ email: credentials.email });
+          const user = await User.findOne({ email: credentials.email });
           if (user) {
             const isMatch = await bcrypt.compare(
               credentials.password,

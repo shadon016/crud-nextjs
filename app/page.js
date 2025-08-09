@@ -2,9 +2,12 @@ import Link from "next/link";
 import Form from "@/components/form.jsx";
 import { getPosts } from "@/services/crudService.js";
 import Delete from "@/components/delete.jsx";
+import { auth } from "@/auth.js";
 export default async function Home() {
   const posts = await getPosts();
+  const session = await auth();
 
+  console.log(session);
   return (
     <div className="h-screen flex justify-between py-12 container mx-auto gap-16">
       <div>
