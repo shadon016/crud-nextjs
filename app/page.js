@@ -14,7 +14,7 @@ export default async function Home() {
             <Link href={`/${post?._id}`}>
               <p>{post?.title}</p>
             </Link>
-            <Link href="/">edit</Link>
+            <Link href={`/${post?._id}/update`}>edit</Link>
             <Delete id={post?._id?.toString()} />
           </div>
         ))}
