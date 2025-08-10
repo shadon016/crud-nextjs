@@ -34,7 +34,7 @@ export const {
             }
           }
         } catch (err) {
-          throw new Error(err);
+          throw new Error("wrong email and password");
         }
       },
     }),
