@@ -3,28 +3,34 @@ import Form from "@/components/form.jsx";
 import { getPosts } from "../../services/crudService";
 import Delete from "@/components/delete.jsx";
 import { checkLogin } from "@/utils/checkAuth.js";
-
+import Profile from "@/components/profile.jsx";
 export default async function Home() {
   const posts = await getPosts();
   await checkLogin();
 
   return (
-    <div className="h-screen flex justify-between py-12 container mx-auto gap-16">
-      <div>
-        <p>all lists</p>
-        {posts?.data?.map((post) => (
-          <div key={post?._id} className="flex gap-3">
-            <Link href={`/${post?._id}`}>
-              <p>{post?.title}</p>
-            </Link>
-            <Link href={`/${post?._id}/update`}>edit</Link>
-            <Delete id={post?._id?.toString()} />
-          </div>
-        ))}
+    <div className="flex ">
+      <div className="flex-1/4">
+        <Profile />
       </div>
-      <div>
-        <Form />
+      <div className="flex-2/4 flex flex-col  py-12 container mx-auto gap-16 h-[200vh] overflow-y-auto">
+        <div>
+          <Form />
+        </div>
+        <div>
+          <p>all lists</p>
+          {posts?.data?.map((post) => (
+            <div key={post?._id} className="flex gap-3">
+              <Link href={`/${post?._id}`}>
+                <p>{post?.title}</p>
+              </Link>
+              <Link href={`/${post?._id}/update`}>edit</Link>
+              <Delete id={post?._id?.toString()} />
+            </div>
+          ))}
+        </div>
       </div>
+      <div className="flex-1/4">suggestion</div>
     </div>
   );
 }
