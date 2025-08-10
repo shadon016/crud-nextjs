@@ -7,3 +7,11 @@ export async function checkLogin() {
     redirect("signin");
   }
 }
+
+export async function islogggedIn(path) {
+  const session = await auth();
+
+  if (session) {
+    redirect(path);
+  }
+}
