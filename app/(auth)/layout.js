@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import { connectDb } from "@/config/mongo";
 
 export const metadata = {
