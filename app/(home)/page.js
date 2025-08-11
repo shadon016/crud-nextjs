@@ -4,6 +4,7 @@ import { getPosts } from "../../services/crudService";
 import Delete from "@/components/delete.jsx";
 import { checkLogin } from "@/utils/checkAuth.js";
 import Profile from "@/components/profile.jsx";
+import Sugesstion from "@/components/sugesstion.jsx";
 export default async function Home() {
   const posts = await getPosts();
   await checkLogin();
@@ -13,12 +14,11 @@ export default async function Home() {
       <div className="flex-1/4">
         <Profile />
       </div>
-      <div className="flex-2/4 flex flex-col  py-12 container mx-auto gap-16 h-[200vh] overflow-y-auto">
+      <div className="flex-2/4 flex flex-col  py-12 container mx-auto gap-16 h-[200vh] overflow-y-auto p-5">
         <div>
           <Form />
         </div>
         <div>
-          <p>all lists</p>
           {posts?.data?.map((post) => (
             <div key={post?._id} className="flex gap-3">
               <Link href={`/${post?._id}`}>
@@ -30,7 +30,9 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <div className="flex-1/4">suggestion</div>
+      <div className="flex-1/4">
+        <Sugesstion />
+      </div>
     </div>
   );
 }

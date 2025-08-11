@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { User } from "@/models/userSchema.js";
+import { User } from "@/models/schemas/userSchema.js";
 
 export const {
   auth,

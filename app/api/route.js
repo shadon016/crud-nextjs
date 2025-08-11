@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Post } from "@/models/postSchema.js";
+import { Post } from "@/models/schemas/postSchema.js";
 import { connectDb } from "@/config/mongo";
 
 export async function GET() {

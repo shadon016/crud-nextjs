@@ -6,7 +6,7 @@ const Profile = async () => {
   const session = await auth();
   const user = await getLoggedInUser(session?.user?.email);
 
-  return <div>{user[0]?.username}</div>;
+  return <div className="sticky top-0">{user[0]?.username}</div>;
 };
 
 export default Profile;
