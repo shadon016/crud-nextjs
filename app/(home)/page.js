@@ -18,14 +18,13 @@ export default async function Home() {
         <div>
           <Form />
         </div>
-        <div>
+        <div className="space-y-3">
           {posts?.data?.map((post) => (
-            <div key={post?._id} className="flex gap-3">
+            <div key={post?._id} className="flex flex-col gap-1">
+              <p className="text-xl font-bold">{post?.userId?.username}</p>
               <Link href={`/${post?._id}`}>
                 <p>{post?.title}</p>
               </Link>
-              <Link href={`/${post?._id}/update`}>edit</Link>
-              <Delete id={post?._id?.toString()} />
             </div>
           ))}
         </div>

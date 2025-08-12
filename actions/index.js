@@ -1,8 +1,10 @@
 "use server";
-import { signIn, signOut } from "@/auth.js";
+import { signIn, signOut, auth } from "@/auth.js";
 import { revalidatePath } from "next/cache";
 import { createPost, deletePost, updatePost } from "@/services/crudService.js";
 import { redirect } from "next/navigation";
+import { getLoggedInUser } from "@/models/queries/user.js";
+import mongoose from "mongoose";
 // auth
 export const login = async (formData) => {
   try {
@@ -28,9 +30,9 @@ export const logout = async () => {
 // posts
 export async function addPostAction(formData) {
   const title = formData.get("title");
-
+  const session = await auth();
   try {
-    await createPost({ title });
+    await createPost({ title, userId: session?.user.id });
     revalidatePath("/");
   } catch (err) {
     console.log(err?.message);

@@ -27,11 +27,15 @@ export const {
               credentials.password,
               user.password
             );
-            if (isMatch) {
-              return user;
-            } else {
-              throw new Error("invalid creadentials");
-            }
+
+            if (!isMatch) throw new Error("Invalid email or password");
+
+            // শুধুমাত্র দরকারি ডেটা রিটার্ন করো
+            return {
+              id: user._id,
+              name: user.username,
+              email: user.email,
+            };
           }
         } catch (err) {
           throw new Error("wrong email and password");
@@ -39,4 +43,19 @@ export const {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      // প্রথম লগইনের সময় user থেকে id নেওয়া
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id; // সেশনে id যোগ
+      }
+      return session;
+    },
+  },
 });
