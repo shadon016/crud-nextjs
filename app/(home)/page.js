@@ -21,10 +21,13 @@ export default async function Home() {
         <div className="space-y-3">
           {posts?.data?.map((post) => (
             <div key={post?._id} className="flex flex-col gap-1">
-              <p className="text-xl font-bold">{post?.userId?.username}</p>
-              <Link href={`/${post?._id}`}>
-                <p>{post?.title}</p>
-              </Link>
+              <div className="flex gap-4 items-center">
+                <Link href={`/${post?.userId._id}`}>
+                  <p className="text-xl font-bold">{post?.userId?.username}</p>
+                </Link>
+                <p>follow</p>
+              </div>
+              <p>{post?.title}</p>
             </div>
           ))}
         </div>
